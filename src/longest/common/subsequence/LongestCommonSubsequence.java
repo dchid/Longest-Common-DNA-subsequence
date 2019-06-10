@@ -36,6 +36,8 @@ public class LongestCommonSubsequence {
         //uncomment for printing rng dna sequences
         LongestCommonSubsequence.printCharArray(x10);
         System.out.println("\n");
+        LongestCommonSubsequence.printCharArray(y10);
+        System.out.println("\n");
         //LongestCommonSubsequence.printCharArray(y10);
         //System.out.println("\n");
 
@@ -64,13 +66,13 @@ public class LongestCommonSubsequence {
         start = System.currentTimeMillis();
         lcs(x1000, y1000);
         stop = System.currentTimeMillis();
-        System.out.println("\nsequence of 1000 compleated in " + (stop - start) + " milliseconds");
+        System.out.println("\nsequence of 1,000 compleated in " + (stop - start) + " milliseconds");
 
-        //timing 10000 (lead to call stack overflow
-        /*start = System.currentTimeMillis();
+        //timing 10000
+        start = System.currentTimeMillis();
         lcs(x10000, y10000);
         stop = System.currentTimeMillis();
-        System.out.println("sequence of 1000 compleated in " + (stop - start) + "milliseconds");*/
+        System.out.println("\nsequence of 10,000 compleated in " + (stop - start) + "milliseconds");
         
         //timing brute force
         start = System.currentTimeMillis();
@@ -145,27 +147,27 @@ public class LongestCommonSubsequence {
     }
 
     static void printLCS(int i, int j, char[][] b, char[] x) {
-        //returns when finished 
-        if (i == -1 || j == -1) {
-            System.out.println("\n");
-            return;
+        //String Builder to reverse sequence
+        StringBuilder sb = new StringBuilder();
+        //returns when finished
+        while (!(i == -1 || j == -1)) {
             //arrow equals up, right, or diagonal
-        }
-        switch (b[i][j]) {
+            if (b[i][j] == 'D') {
             //diagonal arrow
-            case 'D':
-                printLCS((i - 1), (j - 1), b, x);
-                System.out.print(x[i]);
-                break;
-            //up arrow
-            case 'U':
-                printLCS((i - 1), j, b, x);
-                break;
-            //right arrow
-            default:
-                printLCS(i, (j - 1), b, x);
-                break;
+                sb.append(x[i]);
+                i--;
+                j--;
+            }
+            else if (b[i][j] == 'U'){
+                //up arrow
+                i--;
+            }
+            else { // right arrow
+                j--;
+            }
         }
+        String sequence = sb.reverse().toString();
+        System.out.println(sequence);
     }
     
     //getPowerSet is a helper function for bruteLCS to return all substrings
