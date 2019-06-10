@@ -33,13 +33,6 @@ public class LongestCommonSubsequence {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //uncomment for printing rng dna sequences
-        LongestCommonSubsequence.printCharArray(x10);
-        System.out.println("\n");
-        LongestCommonSubsequence.printCharArray(y10);
-        System.out.println("\n");
-        //LongestCommonSubsequence.printCharArray(y10);
-        //System.out.println("\n");
 
         //palendrome
         palindrome("character");
