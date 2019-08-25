@@ -41,43 +41,52 @@ public class LongestCommonSubsequence {
         long start = System.currentTimeMillis();
         lcs(x10, y10);
         long stop = System.currentTimeMillis();
-        System.out.println("\nsequence of 10 compleated in " + (stop - start) + " milliseconds");
+        System.out.println("sequence of 10 compleated in " + (stop - start) + " milliseconds\n");
+        
+        //test for palendrome
+        char comp[] = getCompliment(x10);
+        
+        //test for compliment
+        for (int i = 0; i < 10; i++){
+           System.out.println("x10 " + x10[i]);
+           System.out.println("comp " + comp[i]);
+        }
 
         //timing 20
         start = System.currentTimeMillis();
         lcs(x20, y20);
         stop = System.currentTimeMillis();
-        System.out.println("\nsequence of 20 compleated in " + (stop - start) + " milliseconds");
+        System.out.println("sequence of 20 compleated in " + (stop - start) + " milliseconds\n");
 
         //timing 100
         start = System.currentTimeMillis();
         lcs(x100, y100);
         stop = System.currentTimeMillis();
-        System.out.println("\nsequence of 100 compleated in " + (stop - start) + " milliseconds");
+        System.out.println("sequence of 100 compleated in " + (stop - start) + " milliseconds\n");
 
         //timing 1000
         start = System.currentTimeMillis();
         lcs(x1000, y1000);
         stop = System.currentTimeMillis();
-        System.out.println("\nsequence of 1,000 compleated in " + (stop - start) + " milliseconds");
+        System.out.println("sequence of 1,000 compleated in " + (stop - start) + " milliseconds\n");
 
         //timing 10000
         start = System.currentTimeMillis();
         lcs(x10000, y10000);
         stop = System.currentTimeMillis();
-        System.out.println("\nsequence of 10,000 compleated in " + (stop - start) + "milliseconds");
+        System.out.println("sequence of 10,000 compleated in " + (stop - start) + "milliseconds\n");
         
         //timing brute force
         start = System.currentTimeMillis();
         bruteLCS(x10, y10);
         stop = System.currentTimeMillis();
-        System.out.println("\nbrute forcing 10 in " + (stop - start) + " milliseconds");
+        System.out.println("brute forcing 10 in " + (stop - start) + " milliseconds\n");
         
         //timing brute force
         start = System.currentTimeMillis();
         bruteLCS(x20, y20);
         stop = System.currentTimeMillis();
-        System.out.println("\nbrute forcing 20 in " + (stop - start) + " milliseconds");
+        System.out.println("brute forcing 20 in " + (stop - start) + " milliseconds\n");
     }
 
     static void lcs(char x[], char y[]) {
@@ -161,6 +170,35 @@ public class LongestCommonSubsequence {
         }
         String sequence = sb.reverse().toString();
         System.out.println(sequence);
+    }
+    
+    //returns complimetary DNA sequence by switching nitrogen bases
+    // A <--> T and G <-->C
+    // will not work for mrna as it does not account for uracil
+    static char[] getCompliment(char dna[]) {
+        char output[] = new char[dna.length];
+        for (int base = 0; base < dna.length; base++) {
+            switch (dna[base]) {
+                case 'A':
+                case 'a':
+                    output[base] = 'T';
+                    break;
+                case 'T':
+                case 't':
+                    output[base] = 'A';
+                    break;
+                case 'G':
+                case 'g':
+                    output[base] = 'C';
+                case 'C':
+                case 'c':
+                    output[base] = 'G';
+                    break;
+                default:
+                    System.out.println("invalid char");
+            }
+        }
+        return output;
     }
     
     //getPowerSet is a helper function for bruteLCS to return all substrings
